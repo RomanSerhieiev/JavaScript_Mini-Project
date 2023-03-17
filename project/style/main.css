@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.address, .company {
+    margin-left: 26px;
+}
+
+.geo {
+    margin-left: 53px;
+}
+
+.post-block, .comment-block {
+    display: none;
+}
+
+.display-flex {
+    display: flex;
+    background: #2D2D2D;
+    border-radius: 8px;
+    padding: 17px;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: space-between;
+}
+
+body {
+    font-family: system-ui,-apple-system,segoe ui,Roboto,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji;
+    font-size: 17px;
+    color: #CCC;
+}
+
+#index-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 17px;
+    padding: 17px;
+}
+
+#user-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 17px;
+    padding: 17px;
+    align-items: stretch;
+}
+
+#post-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 17px;
+    padding: 17px;
+}
+
+.user-block, .post {
+    background: #2D2D2D;
+    border-radius: 8px;
+    padding: 17px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#user-container .user-block {
+    grid-column: span 5;
+}
+
+#post-container .post {
+    grid-column: span 4;
+}
+
+button {
+    background-color: #10B981;
+    border: none;
+    border-radius: 4px;
+    color: #FFF;
+    font-weight: 700;
+    padding: 8px;
+    width: 100%;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #047857;
+}
+
+#user-container .user-block button {
+    width: 90%;
+    margin: auto;
+}
+
+.orange {
+    color: #F08D49;
+}
+
+h1 {
+    background: #2D2D2D;
+    border-radius: 8px;
+    color: #7EC699;
+    text-align: center;
+    padding: 17px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+#index-container h1 {
+    grid-column: span 2;
+}
+
+#user-container h1 {
+    grid-column: span 5;
+}
+
+#post-container h1 {
+    grid-column: span 4;
+}
+
+h3 {
+    color: #7EC699;
+    text-transform: uppercase;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
