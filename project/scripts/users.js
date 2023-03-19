@@ -1,14 +1,11 @@
-const container = document.getElementById('index-container');
-const userH1 = document.createElement('h1');
-userH1.innerText = `Users`;
-container.appendChild(userH1);
+const container = document.getElementById('container');
 
 fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
     .then(users => {
         users.forEach(user => {
             const userBlock = document.createElement('div');
-            userBlock.classList.add('user-block');
+            userBlock.classList.add('block');
 
             const userId = document.createElement('p');
             const userIdSpanO = document.createElement('span');

@@ -1,18 +1,20 @@
 const params = new URLSearchParams(window.location.search);
 const userId = params.get('id');
-const container = document.getElementById('user-container');
-const userH1 = document.createElement('h1');
-container.appendChild(userH1);
+const container = document.getElementById('details-container');
+const h1 = document.getElementsByTagName('h1');
 
 Promise.all([
     fetch(`https://jsonplaceholder.typicode.com/users/${userId}`).then(response => response.json()),
-    fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`).then(response => response.json())
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}/albums`).then(response => response.json()),
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`).then(response => response.json()),
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}/todos`).then(response => response.json())
 ])
-    .then(([user, posts]) => {
-        userH1.innerText = `${user.name}`;
+    .then(([user, albums, posts, todos]) => {
+        h1[0].innerText = `User ${user.name}`;
+        document.title = `User ${user.name} | JS MP`;
 
         const userBlock = document.createElement('div');
-        userBlock.classList.add('user-block');
+        userBlock.classList.add('block');
 
         const userId = document.createElement('p');
         const userIdSpanO = document.createElement('span');
@@ -195,34 +197,110 @@ Promise.all([
         userCompanyBs.appendChild(userCompanyBsSpanW);
         userBlock.appendChild(userCompanyBs);
 
-        const btn = document.createElement('button');
-        btn.innerText = 'Posts of current user';
-        btn.onclick = function () {
-            const postBlock = document.querySelectorAll(".post-block");
-            for (const postBlockElement of postBlock) {
-                postBlockElement.classList.toggle("display-flex");
+        const albumsBtn = document.createElement('button');
+        albumsBtn.innerText = `Albums of ${user.name}`;
+        albumsBtn.onclick = function () {
+            const albumBlock = document.querySelectorAll(".album-block");
+            for (const albumBlockElement of albumBlock) {
+                albumBlockElement.classList.toggle("flex-block");
             }
         };
 
-        userBlock.appendChild(btn);
+        const postsBtn = document.createElement('button');
+        postsBtn.innerText = `Posts of ${user.name}`;
+        postsBtn.onclick = function () {
+            const postBlock = document.querySelectorAll(".post-block");
+            for (const postBlockElement of postBlock) {
+                postBlockElement.classList.toggle("flex-block");
+            }
+        };
+
+        const todosBtn = document.createElement('button');
+        todosBtn.innerText = `Todos of ${user.name}`;
+        todosBtn.onclick = function () {
+            const todoBlock = document.querySelectorAll(".todo-block");
+            for (const todoBlockElement of todoBlock) {
+                todoBlockElement.classList.toggle("flex-block");
+            }
+        };
+
+        userBlock.appendChild(albumsBtn);
+        userBlock.appendChild(postsBtn);
+        userBlock.appendChild(todosBtn);
         container.appendChild(userBlock);
+
+        albums.forEach(album => {
+            const albumBlock = document.createElement('div');
+            albumBlock.classList.add('album-block');
+
+            const albumTitle = document.createElement('p');
+            const albumTitleSpanO = document.createElement('span');
+            albumTitleSpanO.classList.add('orange');
+            albumTitleSpanO.innerText = `Album: `;
+            const postTitleSpanW = document.createElement('span');
+            postTitleSpanW.innerText = `${album.title}`;
+            albumTitle.appendChild(albumTitleSpanO);
+            albumTitle.appendChild(postTitleSpanW);
+            albumBlock.appendChild(albumTitle);
+
+            const albumLink = document.createElement('a');
+            albumLink.href = `album-details.html?id=${album.id}`;
+
+            const btn = document.createElement('button');
+            btn.innerText = 'Details';
+
+            albumLink.appendChild(btn);
+            albumBlock.appendChild(albumLink);
+            container.appendChild(albumBlock);
+        });
 
         posts.forEach(post => {
             const postBlock = document.createElement('div');
             postBlock.classList.add('post-block');
 
-            const postTitle = document.createElement('h3');
-            postTitle.innerText = `${post.title}.`;
+            const postTitle = document.createElement('p');
+            const postTitleSpanO = document.createElement('span');
+            postTitleSpanO.classList.add('orange');
+            postTitleSpanO.innerText = `Post: `;
+            const postTitleSpanW = document.createElement('span');
+            postTitleSpanW.innerText = `${post.title}`;
+            postTitle.appendChild(postTitleSpanO);
+            postTitle.appendChild(postTitleSpanW);
             postBlock.appendChild(postTitle);
 
             const postLink = document.createElement('a');
             postLink.href = `post-details.html?id=${post.id}`;
 
             const btn = document.createElement('button');
-            btn.innerText = 'Link';
+            btn.innerText = 'Details';
 
             postLink.appendChild(btn);
             postBlock.appendChild(postLink);
             container.appendChild(postBlock);
+        });
+
+        todos.forEach(todo => {
+            const todoBlock = document.createElement('div');
+            todoBlock.classList.add('todo-block');
+
+            const todoTitle = document.createElement('p');
+            const todoTitleSpanO = document.createElement('span');
+            todoTitleSpanO.classList.add('orange');
+            todoTitleSpanO.innerText = `Todo: `;
+            const todoTitleSpanW = document.createElement('span');
+            todoTitleSpanW.innerText = `${todo.title}`;
+            todoTitle.appendChild(todoTitleSpanO);
+            todoTitle.appendChild(todoTitleSpanW);
+            todoBlock.appendChild(todoTitle);
+
+            const todoLink = document.createElement('a');
+            todoLink.href = `todo-details.html?id=${todo.id}`;
+
+            const btn = document.createElement('button');
+            btn.innerText = 'Details';
+
+            todoLink.appendChild(btn);
+            todoBlock.appendChild(todoLink);
+            container.appendChild(todoBlock);
         });
     });
