@@ -52,11 +52,16 @@ Promise.all([
         postBlock.appendChild(userName);
 
         const btn = document.createElement('button');
-        btn.innerText = `Comments of ${post.title}`;
+        btn.innerText = `Show comments`;
         btn.onclick = function () {
             const commentBlock = document.querySelectorAll(".comment-block");
             for (const commentBlockElement of commentBlock) {
                 commentBlockElement.classList.toggle("flex-block");
+            }
+            if (btn.innerText === `Show comments`) {
+                btn.innerText = `Hide comments`;
+            } else {
+                btn.innerText = `Show comments`;
             }
         };
 

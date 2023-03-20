@@ -41,11 +41,16 @@ Promise.all([
         albumBlock.appendChild(userName);
 
         const btn = document.createElement('button');
-        btn.innerText = `Photos of ${album.title}`;
+        btn.innerText = `Show photos`;
         btn.onclick = function () {
             const commentBlock = document.querySelectorAll(".photo-block");
             for (const commentBlockElement of commentBlock) {
                 commentBlockElement.classList.toggle("flex-block");
+            }
+            if (btn.innerText === `Show photos`) {
+                btn.innerText = `Hide photos`;
+            } else {
+                btn.innerText = `Show photos`;
             }
         };
 

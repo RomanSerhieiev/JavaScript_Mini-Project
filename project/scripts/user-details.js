@@ -198,29 +198,44 @@ Promise.all([
         userBlock.appendChild(userCompanyBs);
 
         const albumsBtn = document.createElement('button');
-        albumsBtn.innerText = `Albums of ${user.name}`;
+        albumsBtn.innerText = `Show albums`;
         albumsBtn.onclick = function () {
-            const albumBlock = document.querySelectorAll(".album-block");
-            for (const albumBlockElement of albumBlock) {
-                albumBlockElement.classList.toggle("flex-block");
+            const commentBlock = document.querySelectorAll(".album-block");
+            for (const commentBlockElement of commentBlock) {
+                commentBlockElement.classList.toggle("flex-block");
+            }
+            if (albumsBtn.innerText === `Show albums`) {
+                albumsBtn.innerText = `Hide albums`;
+            } else {
+                albumsBtn.innerText = `Show albums`;
             }
         };
 
         const postsBtn = document.createElement('button');
-        postsBtn.innerText = `Posts of ${user.name}`;
+        postsBtn.innerText = `Show posts`;
         postsBtn.onclick = function () {
-            const postBlock = document.querySelectorAll(".post-block");
-            for (const postBlockElement of postBlock) {
-                postBlockElement.classList.toggle("flex-block");
+            const commentBlock = document.querySelectorAll(".post-block");
+            for (const commentBlockElement of commentBlock) {
+                commentBlockElement.classList.toggle("flex-block");
+            }
+            if (postsBtn.innerText === `Show posts`) {
+                postsBtn.innerText = `Hide posts`;
+            } else {
+                postsBtn.innerText = `Show posts`;
             }
         };
 
         const todosBtn = document.createElement('button');
-        todosBtn.innerText = `Todos of ${user.name}`;
+        todosBtn.innerText = `Show todos`;
         todosBtn.onclick = function () {
-            const todoBlock = document.querySelectorAll(".todo-block");
-            for (const todoBlockElement of todoBlock) {
-                todoBlockElement.classList.toggle("flex-block");
+            const commentBlock = document.querySelectorAll(".todo-block");
+            for (const commentBlockElement of commentBlock) {
+                commentBlockElement.classList.toggle("flex-block");
+            }
+            if (todosBtn.innerText === `Show todos`) {
+                todosBtn.innerText = `Hide todos`;
+            } else {
+                todosBtn.innerText = `Show todos`;
             }
         };
 
